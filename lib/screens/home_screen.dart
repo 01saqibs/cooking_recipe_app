@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../constants/constant.dart';
 import '../custom_widgets/cutom_container.dart';
+import 'detailed_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -45,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Top Icons
                 Padding(
                   padding: const EdgeInsets.only(
                       left: padding, right: padding, top: padding),
@@ -72,9 +72,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
+
                 const SizedBox(
                   height: 10,
                 ),
+
+                // BreakFast Typography
+
                 Padding(
                   padding: const EdgeInsets.only(left: padding),
                   child: RichText(
@@ -95,10 +99,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                 fontWeight: FontWeight.bold)),
                       ])),
                 ),
+
+                // Categories and list of items
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // Rotated Categories list
+
                     Padding(
                       padding: const EdgeInsets.only(top: 40),
                       child: Column(
@@ -140,11 +149,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                 )),
                       ),
                     ),
+
+                    // Containers list (Page View)
+
                     Expanded(
                       child: SizedBox(
                         height: 450,
                         child: PageView.builder(
-
+                            physics: const BouncingScrollPhysics(),
                             onPageChanged: (int applyIndex) {
                               setState(() {
                                 currentIndex = applyIndex;
@@ -153,15 +165,75 @@ class _HomeScreenState extends State<HomeScreen> {
                             controller: controller,
                             itemCount: 3,
                             itemBuilder: (context, index) {
-                              return CustomContainer(
-                                currentIndex: currentIndex,
-                                index: index,
+                              return InkWell(
+                                onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(
+                                      builder: (BuildContext context) {
+                                    return const DetailedScreen();
+                                  }));
+                                },
+                                child: CustomContainer(
+                                  currentIndex: currentIndex,
+                                  index: index,
+                                ),
                               );
                             }),
                       ),
                     )
                   ],
-                )
+                ),
+
+                // Bottom icon and list of food category
+                Container(
+                  padding: const EdgeInsets.only(left: padding),
+                  height: 100,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        Icons.filter_list,
+                        size: 28,
+                        color: Colors.black38,
+                      ),
+                      const SizedBox(
+                        width: 30,
+                      ),
+                      Expanded(
+                        child: ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: 3,
+                            itemBuilder: (context, index) {
+                              final list = ["Juices", "Foods", "Others"];
+                              return Padding(
+                                padding: const EdgeInsets.only(right: 30),
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 15),
+                                  margin:
+                                      const EdgeInsets.symmetric(vertical: 15),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: index == 1
+                                          ? greenColor
+                                          : Colors.black.withOpacity(0.05)),
+                                  child: Text(
+                                    list[index],
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: index == 1
+                                            ? Colors.white
+                                            : Colors.black.withOpacity(0.30)),
+                                  ),
+                                ),
+                              );
+                            }),
+                      )
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
@@ -170,5 +242,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-

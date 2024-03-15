@@ -36,17 +36,15 @@ class CustomContainer extends StatelessWidget {
             top: -20,
             left: -20,
             child: Container(
-              decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                        color: currentIndex == index
-                            ? greenColor.withOpacity(0.8)
-                            : Colors.black.withOpacity(0),
-                        spreadRadius: -5,
-                        offset: const Offset(10, 10),
-                        blurRadius: 18)
-                  ],
-                  color: greenColor, shape: BoxShape.circle),
+              decoration: BoxDecoration(boxShadow: [
+                BoxShadow(
+                    color: currentIndex == index
+                        ? greenColor.withOpacity(0.8)
+                        : Colors.black.withOpacity(0),
+                    spreadRadius: -5,
+                    offset: const Offset(10, 10),
+                    blurRadius: 18)
+              ], color: greenColor, shape: BoxShape.circle),
               child: IconButton(
                   onPressed: () {},
                   icon: const Icon(
@@ -60,23 +58,19 @@ class CustomContainer extends StatelessWidget {
               right: -25,
               top: 30,
               child: Container(
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                          color: currentIndex == index
-                              ? Colors.black.withOpacity(0.15)
-                              : Colors.black.withOpacity(0),
-                          spreadRadius: -5,
-                          offset: const Offset(15, 15),
-                          blurRadius: 20)
-                    ]
-                ),
+                decoration: BoxDecoration(shape: BoxShape.circle, boxShadow: [
+                  BoxShadow(
+                      color: currentIndex == index
+                          ? Colors.black.withOpacity(0.15)
+                          : Colors.black.withOpacity(0),
+                      spreadRadius: -5,
+                      offset: const Offset(15, 15),
+                      blurRadius: 20)
+                ]),
                 child: AnimatedRotation(
-                  turns: currentIndex == index ? 1/2 : 0,
-                  duration: Duration(milliseconds: 400),
-                  child: Image(
-
+                  turns: currentIndex == index ? 1 / 2 : 0,
+                  duration: const Duration(milliseconds: 400),
+                  child: const Image(
                     image: AssetImage("assets/images/salad.png"),
                     height: 150,
                   ),
@@ -91,7 +85,7 @@ class CustomContainer extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(top: 15, right: 10),
+                      margin: const EdgeInsets.only(top: 15, right: 10),
                       height: 10,
                       width: 10,
                       decoration: const BoxDecoration(
@@ -103,26 +97,29 @@ class CustomContainer extends StatelessWidget {
                         text: TextSpan(
                             style: Theme.of(context).textTheme.bodyLarge,
                             children: const [
-                              TextSpan(
-                                  text: "Blue",
-                                  style: TextStyle(
-                                      color: textColor,
-                                      fontSize: 26,
-                                      fontWeight: FontWeight.w100)),
-                              TextSpan(
-                                  text: "\nSalad",
-                                  style: TextStyle(
-                                      color: textColor,
-                                      fontSize: 26,
-                                      fontWeight: FontWeight.bold)),
-                            ])),
+                          TextSpan(
+                              text: "Blue",
+                              style: TextStyle(
+                                  color: textColor,
+                                  fontSize: 26,
+                                  fontWeight: FontWeight.w100)),
+                          TextSpan(
+                              text: "\nSalad",
+                              style: TextStyle(
+                                  color: textColor,
+                                  fontSize: 26,
+                                  fontWeight: FontWeight.bold)),
+                        ])),
                   ],
                 ),
-                SizedBox(height: 20,),
-                SizedBox(
+                const SizedBox(
+                  height: 20,
+                ),
+                const SizedBox(
                   height: 100,
                   width: double.infinity,
-                  child: Text("A Salad is a dish consisting of a mixture of small pieces of food, usually vegetables.",
+                  child: Text(
+                    "A Salad is a dish consisting of a mixture of small pieces of food, usually vegetables.",
                     style: TextStyle(fontSize: 12),
                     maxLines: 4,
                   ),
